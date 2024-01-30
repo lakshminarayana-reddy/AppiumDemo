@@ -2,12 +2,14 @@ package AppiumTest.MobileAutomationDemo;
 
 import java.net.URL;
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 
 public class FieldClimate {
 	static  AppiumDriver driver;
@@ -25,13 +27,14 @@ public class FieldClimate {
 		cap.setCapability("udid","R9ZRB069TNP");
 		cap.setCapability("platformName", "Android");
 		cap.setCapability("platformVersion", "13");
+		cap.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+		cap.setCapability("autoAcceptAlerts", true);
 		cap.setCapability("appPackage", "com.metos.fieldclimate");
 		cap.setCapability("appActivity", "com.metos.fieldclimate.MainActivity");
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
-		driver = new AppiumDriver(url,cap);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
-		driver.switchTo().alert().dismiss();
-		cap.setCapability("autoGrantPermissions", true);
+		driver = new AppiumDriver(url, cap);
+		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+//		driver.switchTo().alert().dismiss();		
 //		WebElement locationOff = driver.findElement(By.id("android:id/button2"));
 //		locationOff.click();
 //		WebElement layOut = driver.findElement(By.xpath("/hierarchy/android.widget.FrameLayout"));
@@ -61,7 +64,10 @@ public class FieldClimate {
 		WebElement cancelBtn = driver.findElement(By.id("com.metos.fieldclimate:id/cancelBtn"));
 		cancelBtn.click();
 		System.out.println("Cancel button clicked");
-		WebElement backBtn = driver.findElement(By.xpath("//android.widget.ImageView[@resource-id=\"com.metos.fieldclimate:id/backBtn\"]"));
+		Thread.sleep(5000);
+		System.out.println("Test");
+		WebElement backBtn = driver.findElement(By.id("com.metos.fieldclimate:id/backBtn"));
+		backBtn.click();
 		backBtn.click();
 		System.out.println("Back button clicked");
 		WebElement sideMenu = driver.findElement(By.xpath("//android.widget.ImageButton[@content-desc=\"Open navigation drawer\"]"));

@@ -45,7 +45,7 @@ public class OpenApplication {
 		//adb shell dumpsys window | find "mCurrentFocus"
 		URL url = new URL("http://127.0.0.1:4723/wd/hub");
 		driver = new AppiumDriver(url,cap);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
+		//..manage().timeouts().implicitlyWait(Duration.ofSeconds(5000));
 		WebElement signIn = driver.findElement(By.id("com.android.chrome:id/signin_fre_continue_button"));
 		signIn.click();
 		WebElement yesIamInButton = driver.findElement(By.id("com.android.chrome:id/button_primary"));
